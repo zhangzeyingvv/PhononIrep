@@ -55,34 +55,6 @@ def getcharandsymm(supercell,unitcell_filename,force_constants_filename,kset,sym
         chardict[k]=char
     return chardict
 
-def getcharandsymmfs(supercell,unitcell_filename,force_constants_filename,kset,symprec,degeneracy_tolerance):
-    chardict={}
-    ph = phonopy.load(supercell_matrix=supercell,
-            unitcell_filename=unitcell_filename,
-            primitive_matrix=[-1/2, 1/2, 1/2, 1/2, -1/2, 1/2, 1/2, 1/2, -1/2],
-            force_sets_filename=force_constants_filename,
-            symprec=symprec)
-    symm=Symmetry(ph._primitive, symprec=symprec).get_dataset()
-    symm=dict((k,symm[k]) for k in ('number','rotations','translations','transformation_matrix') if k in symm)
-    symm['rotations']=np.array(symm['rotations'],dtype='int64')
-    chardict['symmetry']=symm
-    for k in kset:
-        ph.set_irreps(k,
-                is_little_cogroup=False,
-                nac_q_direction=None,
-                degeneracy_tolerance=degeneracy_tolerance)
-        char={}
-        char['rotations']=np.array( ph._irreps._conventional_rotations,dtype='int64')
-        char['q-position']=ph._irreps._q
-        char['normal_modes']=[]
-        for i, deg_set in enumerate(ph._irreps._degenerate_sets):
-            char['normal_modes'].append({
-                'band_indices': [i+1 for i in deg_set],
-                'frequency': ph._irreps._freqs[deg_set[0]],
-                'characters': ph._irreps._characters[i]})
-        chardict[k]=char
-    return chardict
-
 "];
 
     
