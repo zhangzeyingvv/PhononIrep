@@ -1,5 +1,6 @@
 (* ::Package:: *)
-
+(* Zhang Zeying *)
+(* E-mail: zhangzeyingvv@gmail.com *)
 BeginPackage["PhononIrep`",{"SpaceGroupIrep`"}]
 
 getcharandsymm ::usage = ""
