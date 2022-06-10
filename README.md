@@ -17,10 +17,8 @@ pip install pyzmq
 ## Configure Mathematica
 Copy the SpaceGroupIrep direcory and PhononIrep.wl into any of the Mathematica `$Path` direcory.
 
-That all for installation
+That all for installation.
 
-# Installation for Linux and Mac
-The installation step for Linux and Mac is simllar to Windows.
 
 
 # Run PhononIrep
