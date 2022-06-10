@@ -10,7 +10,9 @@ e.g. install anaconda or miniconda, and run
 ```
 conda install -c conda-forge phonopy
 ```
-in the anaconda(miniconda) prompt. To interface with Mathematica one need also install pyzmq by
+in the anaconda(miniconda) prompt. 
+
+To interface with Mathematica one need also install pyzmq by
 ```
 pip install pyzmq 
 ```
