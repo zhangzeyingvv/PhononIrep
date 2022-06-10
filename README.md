@@ -33,7 +33,7 @@ SetEnvironment["PATH" -> Environment["PATH"] <> ";" <> path <> "\\Library\\bin"]
 RegisterExternalEvaluator["Python", path <> "\\python.exe"];
 Needs["PhononIrep`"]
 ```
-to import PhononIrep. Here, one need to modify the `path` to the Python installation direcory. For Linux and Mac `python.exe` should be modfied by `python`, and run 
+to import PhononIrep. Here, one need to modify the `path` to the Python installation direcory. For Linux and Mac OS `python.exe` should be modfied by `python`, and run 
 ```
 calcPhononIrep["supercell" -> {2, 2, 1},
  "unitcell" -> NotebookDirectory[] <> "POSCAR-unitcell",
