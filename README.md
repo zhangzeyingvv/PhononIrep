@@ -40,4 +40,4 @@ calcPhononIrep["supercell" -> {2, 2, 1},
  "showRep" -> True
  ]
  ```
- to calculate the irreducible representations of Gamma point of given structure.
+ to calculate the irreducible representations of Gamma point for input structure.
