@@ -26,14 +26,14 @@ That all for installation.
 # Run PhononIrep
 
 
-One can open a Mathematica notebook and run
+You can open a Mathematica notebook, save it in the directory where you do your phonopy calculations, and run
 ```
 path = "D:\\Anaconda3"
 SetEnvironment["PATH" -> Environment["PATH"] <> ";" <> path <> "\\Library\\bin"];
 RegisterExternalEvaluator["Python", path <> "\\python.exe"];
 Needs["PhononIrep`"]
 ```
-to import PhononIrep. Here, one need to modify the `path` to the Python installation direcory. For Linux and Mac OS `python.exe` should be modfied by `python`, and run 
+to import PhononIrep. Here, you need to modify the `path` to the Python installation direcory. For Linux and Mac OS `python.exe` should be modfied by `python`, and run 
 ```
 calcPhononIrep["supercell" -> {2, 2, 1},
  "unitcell" -> NotebookDirectory[] <> "POSCAR-unitcell",
