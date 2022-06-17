@@ -45,3 +45,10 @@ calcPhononIrep["supercell" -> {2, 2, 1},
  ]
  ```
  to calculate the irreducible representations of Gamma point for input structure.
+ 
+# Release Notes
+
+v1.00b 2022/06/17
+
+Add an example for diamond.
+
