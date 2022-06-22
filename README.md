@@ -19,7 +19,7 @@ pip install pyzmq
 ## Configure Mathematica
 According to the test, PhonoIrep cannot work in Matnematica 12.0, Therefore I recommended to run PhonoIrep in Mathematica 12.2 or 12.3. I will try to fix compatibility issues in the furture. 
 
-Copy the SpaceGroupIrep direcory and PhononIrep.wl into any of the Mathematica `$Path` direcory.
+Copy the [SpaceGroupIrep](https://github.com/goodluck1982/SpaceGroupIrep) direcory and PhononIrep.wl into any of the Mathematica `$Path` direcory.
 
 That all for installation.
 
