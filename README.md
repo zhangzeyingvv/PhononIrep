@@ -5,7 +5,7 @@ A phonon irreducible representations calculator([arXiv2201.11350](https://arxiv.
 # Installation
 One need install both Python and Mathematica.
 ## Configure Python
-First you should install python and phonopy.
+First you should install python3 and phonopy.
 e.g. install anaconda or miniconda, and run 
 ```
 conda install -c conda-forge phonopy
