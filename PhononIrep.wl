@@ -155,6 +155,42 @@ phonopyIrepIO[char_] := Module[{nele, SymmData, CharData,
   ];
 
 
+getBZtype[poscarFile_, prec_] := 
+  Module[{cell, sym, BCcell, brav, sgno, U, Q, t0, S, R, hsp, 
+    bravtype}, cell = readPOSCAR[poscarFile];
+   sym = spglibGetSym[Values[cell][[1 ;; 3]], prec];
+   sgno = sym["number"];
+   brav = getSGLatt[sgno];
+   (*Print[brav];*)bravtype = checkBasVec[brav, cell[[1]]];
+   (*Print[bravtype];*)If[bravtype[[1]], bravtype = bravtype[[2]];
+    If[bravtype != "", brav = brav <> "(" <> bravtype <> ")"];
+    (*Print[checkBasVec[brav,BCcell[[1]]]];*)
+    hsp = N@BCHighSymKpt[brav][[;; , ;; 3]];
+    {brav, Select[hsp, #[[2]] == "" &]}, {t0, U} = 
+     SGGenElem[sgno][[{2, 3}]];
+    {Q, S} = getQandS[sgno];
+    BCcell = cell;
+    BCcell["basVec"] = 
+     Transpose@(S . sym["R"] . Transpose[cell["basVec"]] . 
+         Inverse[sym["P"]] . Q . U) // Chop;
+    (*BCcell["pos"]=Inverse[Q.U].(sym["P"].#+sym["p0"])+t0&/@cell[
+    "pos"]//Chop;*)(*Print[cell,BCcell[[1]]];*)bravtype = "";
+    If[MemberQ[{"OrthBase", "OrthBody", "OrthFace", "TetrBody", 
+       "TrigPrim"}, brav], 
+     bravtype = checkBasVec[brav, BCcell[[1]]][[2]];
+     (*Print[checkBasVec[brav,BCcell[[1]]]];*)
+     brav = brav <> "(" <> bravtype <> ")";];
+    hsp = BCHighSymKpt[brav][[;; , ;; 3]];
+    
+    hsp = 
+     MapAt[Inverse[Transpose[Inverse[sym["P"]] . Q . U]] . # &, 
+      hsp, {;; , 3}];
+    {bravtype, brav, Select[hsp, #[[2]] == "" &]}]
+   
+   ];
+
+
+
 Options[calcPhononIrep] = {
    "supercell" -> {1, 1, 1},
    "unitcell" ->  "POSCAR-unitcell",
@@ -171,7 +207,7 @@ calcPhononIrep[OptionsPattern[]] := Module[{
    symprec = N@OptionValue["symprec"],
    degeneracytolerance = N@OptionValue["degeneracytolerance"],
    showRep = OptionValue["showRep"],
-   char, tracedata, tr, rep1
+   char, tracedata, tr, rep1,bztype
    },
   char = getcharandsymm[
     "supercell" -> supercell,
@@ -185,7 +221,9 @@ calcPhononIrep[OptionsPattern[]] := Module[{
    readVasp2trace[FileNameJoin[{$TemporaryDirectory, "trace.txt"}]];
    (*tr = autoConvTraceToBC["C:\\Users\\zhang\\Documents\\POSCARasdasd", tracedata];*)
   tr = autoConvTraceToBC[unitcell, tracedata];
-  rep1 = getBandRep[char["symmetry"]["number"], "", 
+  bztype=getBZtype[unitcell,symprec][[1]];
+  (*Print[bztype];*)
+  rep1 = getBandRep[char["symmetry"]["number"], bztype, 
   (*For SpaceGroupIrep <=1.03 use tr["trace"]]; otherwise use tr];*)
     (*tr["trace"]];*)
     tr];
