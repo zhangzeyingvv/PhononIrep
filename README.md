@@ -52,3 +52,6 @@ v1.00b 2022/06/17
 
 Add an example for diamond.
 
+v1.01 2022/11/08
+
+Automatically identify BZ type.
