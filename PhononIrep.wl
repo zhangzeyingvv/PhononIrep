@@ -222,14 +222,16 @@ calcPhononIrep[OptionsPattern[]] := Module[{
    (*tr = autoConvTraceToBC["C:\\Users\\zhang\\Documents\\POSCARasdasd", tracedata];*)
   tr = autoConvTraceToBC[unitcell, tracedata];
   bztype=getBZtype[unitcell,symprec][[1]];
-  (*Print[bztype];*)
+  bztype=StringCases[bztype,"("~~x_~~")"->x];
+  If[bztype=={},bztype="",bztype=bztype[[1]]];
+  (*Print[getBZtype[unitcell,symprec],bztype];*)
   rep1 = getBandRep[char["symmetry"]["number"], bztype, 
   (*For SpaceGroupIrep <=1.03 use tr["trace"]]; otherwise use tr];*)
     (*tr["trace"]];*)
     tr];
     
-    (*;
-  MatrixForm /@ rep1["rep"]*)
+    
+  (*Print[rep1];*)
   Print["SG No:",char["symmetry"]["number"]];
   If[showRep,showIrep[rep1];rep1,rep1]
   ];
@@ -247,6 +249,4 @@ Print@Grid[Join[{head},{{"Band","Frequency","dim","Irep"}},rep[[n]]],Frame->All]
 
 End[];
 EndPackage[];
-
-
 
